@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IQ Labyrinth — Dark Red / INTJ</title>
+    <meta
+      name="description"
+      content="IQ Labyrinth — INTJ style minimal IQ test. Step-by-step, responsive, dark-red theme." />
+
+    <!-- Required CSS (separate file) -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Accessibility: prefer-reduced-motion handled by CSS/JS -->
+  </head>
+  <body class="dark-green intj">
+    <!-- Root app container: ALL UI is present in DOM once and updated by script.js -->
+    <div id="app" class="app" aria-live="polite">
+      <!-- Header -->
+      <header class="app-header">
+        <div class="brand-wrap">
+          <h1 class="brand" data-i18n="brand">IQ Labyrinth</h1>
+          <p class="tagline" data-i18n="tagline">Minimal. Focused. Smart.</p>
+        </div>
+        <div class="meta">
+          <small class="mode-label" data-i18n="mode">AESTHETIC Mode</small>
+        </div>
+      </header>
+
+      <!-- Main steps (all present initially; script.js will toggle classes/text) -->
+      <main class="app-main" role="main">
+        <!-- Step 1: Nickname -->
+        <section class="step step--active" data-step="1" aria-hidden="false">
+          <h2 class="step-title" data-i18n="step1_title">
+            Welcome, strategist
+          </h2>
+          <p class="step-sub" data-i18n="step1_sub">
+            Enter a nickname to begin.
+          </p>
+
+          <label class="field" for="nickname" data-i18n="nickname_label"
+            >Nickname</label
+          >
+          <input
+            id="nickname"
+            class="input"
+            type="text"
+            maxlength="24"
+            autocomplete="nickname"
+            placeholder="nxllabyss"
+            aria-label="Nickname" />
+
+          <p class="motivation" data-i18n="motivate_1">
+            Tiny focus. Big clarity.
+          </p>
+
+          <div class="controls">
+            <button
+              class="btn btn-next"
+              data-step-target="2"
+              data-delay="800"
+              aria-disabled="true"
+              aria-label="Next">
+              <span data-i18n="next">Next</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 2: Language -->
+        <section class="step" data-step="2" aria-hidden="true">
+          <h2 class="step-title" data-i18n="step2_title">Choose language</h2>
+          <p class="step-sub" data-i18n="step2_sub">
+            All UI will adapt to your choice.
+          </p>
+
+          <div
+            class="options options--lang"
+            role="radiogroup"
+            aria-label="Language selection">
+            <button class="option-btn" data-lang="en" aria-pressed="false">
+              English
+            </button>
+            <button class="option-btn" data-lang="uz" aria-pressed="false">
+              O'zbek
+            </button>
+            <button class="option-btn" data-lang="ru" aria-pressed="false">
+              Русский
+            </button>
+          </div>
+
+          <p class="motivation" data-i18n="motivate_2">
+            Language shapes thought — pick one.
+          </p>
+
+          <div class="controls">
+            <button class="btn btn-prev" data-step-target="1" aria-label="Back">
+              ← <span data-i18n="back">Back</span>
+            </button>
+            <button
+              class="btn btn-next"
+              data-step-target="3"
+              data-delay="800"
+              aria-disabled="true">
+              <span data-i18n="next">Next</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 3: Difficulty -->
+        <section class="step" data-step="3" aria-hidden="true">
+          <h2 class="step-title" data-i18n="step3_title">Choose difficulty</h2>
+          <p class="step-sub" data-i18n="step3_sub">
+            Easy / Medium / Hard — intelligence, measured.
+          </p>
+
+          <div
+            class="options options--difficulty"
+            role="radiogroup"
+            aria-label="Difficulty selection">
+            <button
+              class="option-btn"
+              data-difficulty="easy"
+              aria-pressed="false">
+              Easy
+            </button>
+            <button
+              class="option-btn"
+              data-difficulty="medium"
+              aria-pressed="false">
+              Medium
+            </button>
+            <button
+              class="option-btn"
+              data-difficulty="hard"
+              aria-pressed="false">
+              Hard
+            </button>
+          </div>
+
+          <p class="motivation" data-i18n="motivate_3">
+            Challenge chosen — optimize your approach.
+          </p>
+
+          <div class="controls">
+            <button class="btn btn-prev" data-step-target="2">
+              ← <span data-i18n="back">Back</span>
+            </button>
+            <button
+              class="btn btn-next"
+              data-step-target="4"
+              data-delay="800"
+              aria-disabled="true">
+              <span data-i18n="next">Next</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 4: Timer -->
+        <section class="step" data-step="4" aria-hidden="true">
+          <h2 class="step-title" data-i18n="step4_title">Timer</h2>
+          <p class="step-sub" data-i18n="step4_sub">
+            No timer or choose a challenge pace.
+          </p>
+
+          <div
+            class="options options--timer"
+            role="radiogroup"
+            aria-label="Timer selection">
+            <button
+              class="option-btn"
+              data-timer="none"
+              aria-pressed="false"
+              data-i18n="timer_none">
+              No timer
+            </button>
+            <button class="option-btn" data-timer="30" aria-pressed="false">
+              30s
+            </button>
+            <button class="option-btn" data-timer="60" aria-pressed="false">
+              60s
+            </button>
+          </div>
+
+          <p class="motivation" data-i18n="motivate_4">
+            Time is a constraint — use it or not.
+          </p>
+
+          <div class="controls">
+            <button class="btn btn-prev" data-step-target="3">
+              ← <span data-i18n="back">Back</span>
+            </button>
+            <button
+              class="btn btn-next"
+              data-step-target="5"
+              data-delay="800"
+              aria-disabled="true">
+              <span data-i18n="next">Next</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 5: Question count -->
+        <section class="step" data-step="5" aria-hidden="true">
+          <h2 class="step-title" data-i18n="step5_title">
+            How many questions?
+          </h2>
+          <p class="step-sub" data-i18n="step5_sub">
+            Pick a testing length or go Endless.
+          </p>
+
+          <div
+            class="options options--count"
+            role="radiogroup"
+            aria-label="Question count">
+            <button class="option-btn" data-count="10" aria-pressed="false">
+              10
+            </button>
+            <button class="option-btn" data-count="20" aria-pressed="false">
+              20
+            </button>
+            <button class="option-btn" data-count="30" aria-pressed="false">
+              30
+            </button>
+            <button
+              class="option-btn"
+              data-count="endless"
+              aria-pressed="false"
+              data-i18n="endless">
+              Endless
+            </button>
+          </div>
+
+          <p class="info info--endless" data-i18n="endless_info">
+            Endless mode: questions continue until you stop — perfect for
+            practice.
+          </p>
+          <p class="motivation" data-i18n="motivate_5">
+            Consistency beats speed. Keep steady.
+          </p>
+
+          <div class="controls">
+            <button class="btn btn-prev" data-step-target="4">
+              ← <span data-i18n="back">Back</span>
+            </button>
+            <button
+              class="btn btn-start"
+              data-step-target="6"
+              data-delay="800"
+              aria-disabled="true">
+              <span data-i18n="start">Start Test</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 6: Test interface -->
+        <section class="step" data-step="6" aria-hidden="true">
+          <div class="test-header">
+            <div class="player">
+              <strong id="player-nickname" class="player-name">—</strong>
+              <small
+                id="player-meta"
+                class="player-meta"
+                data-i18n="player_meta"
+                >Ready</small
+              >
+            </div>
+
+            <div class="timer-wrap" aria-hidden="false">
+              <div id="timer" class="timer" aria-live="polite">00:00</div>
+              <div class="timer-anim" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div
+            class="progress"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0">
+            <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+            <div class="progress-meta">
+              <span id="progress-count">0/0</span>
+              <span id="progress-percent">0%</span>
+            </div>
+          </div>
+
+          <!-- Question area -->
+          <article class="question-area" aria-live="polite">
+            <h3 id="question-text" class="question-text">
+              Question will appear here
+            </h3>
+
+            <div class="answers" role="list">
+              <!-- Four answer buttons (script.js will update labels & states) -->
+              <button
+                class="answer-btn"
+                data-answer-index="0"
+                role="listitem"
+                aria-pressed="false"></button>
+              <button
+                class="answer-btn"
+                data-answer-index="1"
+                role="listitem"
+                aria-pressed="false"></button>
+              <button
+                class="answer-btn"
+                data-answer-index="2"
+                role="listitem"
+                aria-pressed="false"></button>
+              <button
+                class="answer-btn"
+                data-answer-index="3"
+                role="listitem"
+                aria-pressed="false"></button>
+            </div>
+          </article>
+
+          <!-- Feedback & controls -->
+          <div class="controls test-controls">
+            <button class="btn btn-skip" data-action="skip" data-i18n="skip">
+              Skip
+            </button>
+            <button
+              class="btn btn-next-question"
+              data-action="next-question"
+              aria-disabled="true"
+              data-delay="800">
+              <span data-i18n="next_q">Next</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Results step -->
+        <section class="step" data-step="7" aria-hidden="true">
+          <h2 class="step-title" data-i18n="results_title">Results</h2>
+
+          <div class="results-card">
+            <p class="results-iq">
+              <strong id="iq-score">—</strong>
+              <small data-i18n="iq_label">IQ Score</small>
+            </p>
+
+            <p id="results-summary" class="results-summary">
+              Summary and insights will appear here.
+            </p>
+
+            <div class="results-actions">
+              <button
+                class="btn btn-retry"
+                data-action="retry"
+                data-i18n="retry">
+                Retry
+              </button>
+              <button
+                class="btn btn-share"
+                data-action="share"
+                data-i18n="share">
+                Share
+              </button>
+            </div>
+          </div>
+
+          <p class="motivation" data-i18n="motivate_result">
+            You optimized. Well done.
+          </p>
+        </section>
+      </main>
+
+      <footer class="app-footer" role="contentinfo">
+        <small data-i18n="footer">Built for focus — INTJ aesthetic.</small>
+      </footer>
+    </div>
+
+    <!-- Noscript fallback -->
+    <noscript>
+      <div class="noscript-warning">
+        <p data-i18n="noscript">
+          JavaScript is required for IQ Labyrinth to function. Please enable
+          JavaScript.
+        </p>
+      </div>
+    </noscript>
+
+    <!-- Questions and logic scripts (separate files) -->
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
