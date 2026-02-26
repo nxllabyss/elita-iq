@@ -1,0 +1,462 @@
+/* IQ Labyrinth — Dark Red / INTJ style
+   Filename: style.css
+   Purpose: Dark Red theme, minimal INTJ UI, responsive, animations.
+*/
+
+/* ---------------------------
+   Theme variables
+   --------------------------- */
+:root{
+  --bg: #2b0000;           /* page background */
+  --panel: #3d0000;        /* container background */
+  --accent: #ff4c4c;       /* primary accent (buttons, progress) */
+  --accent-weak: #ffb3b3;  /* softer accent (timer text) */
+  --muted: #550000;        /* progress background / muted lines */
+  --text: #ffffff;         /* primary text */
+  --success: #00ff88;      /* correct flash */
+  --danger: #ff4444;       /* wrong flash / shake */
+  --glass: rgba(255,76,76,0.2);
+  --shadow-neon: 0 8px 30px rgba(255,76,76,0.2);
+  --radius: 12px;
+  --max-width: 700px;
+  --gap: 16px;
+  --btn-padding: 12px 18px;
+  --btn-radius: 10px;
+  --transition-fast: 180ms;
+  --transition-slow: 320ms;
+  --font-sans: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ---------------------------
+   Base / Reset
+   --------------------------- */
+* { box-sizing: border-box; }
+html,body{
+  height:100%;
+  margin:0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.4;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Container centering */
+#app{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+}
+
+/* Main content panel */
+.app-main, .app-header, .app-footer{
+  width:100%;
+  max-width: var(--max-width);
+}
+
+.app-header{
+  margin-bottom: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.brand {
+  font-size:22px;
+  letter-spacing:0.6px;
+  margin:0;
+  font-weight:600;
+}
+.tagline{
+  margin:0;
+  color: rgba(255,255,255,0.8);
+  font-size:13px;
+}
+
+/* Panel style for each step */
+.step{
+  background: linear-gradient(180deg, rgba(255,76,76,0.03) 0%, rgba(0,0,0,0.02) 100%), var(--panel);
+  border-radius: 15px;
+  box-shadow: var(--shadow-neon);
+  padding: 22px;
+  margin: 12px 0;
+  max-width:100%;
+  width:100%;
+  display:none;               /* script toggles .step--active */
+  opacity:0;
+  transform: translateY(8px);
+  transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease;
+}
+
+/* Visible step */
+.step--active{
+  display:block;
+  opacity:1;
+  transform:none;
+}
+
+/* Minimal headings */
+.step-title{
+  margin:0 0 6px 0;
+  font-size:18px;
+  font-weight:700;
+  color: var(--text);
+}
+.step-sub{
+  margin:0 0 14px 0;
+  color: rgba(255,255,255,0.85);
+  font-size:13px;
+}
+
+/* Motivation / step messages (italic + subtle fade-in) */
+.motivation, .info{
+  margin-top:12px;
+  font-style:italic;
+  color: rgba(255,255,255,0.75);
+  font-size:13px;
+  opacity:0;
+  transform: translateY(6px);
+  animation: fadeInSub 420ms var(--transition-fast) ease forwards;
+}
+@keyframes fadeInSub{
+  to { opacity:1; transform:none; }
+}
+
+/* Input */
+.input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  color:var(--text);
+  font-size:15px;
+  outline:none;
+  margin-top:8px;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+.input:focus{
+  box-shadow: 0 6px 18px rgba(255,76,76,0.08);
+  border-color: rgba(255,76,76,0.28);
+}
+
+/* Options (radio-like buttons) */
+.options{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.option-btn{
+  flex: 1 1 140px;
+  min-width: 100px;
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  background: rgba(0,0,0,0.12);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.04);
+  cursor:pointer;
+  transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease, background var(--transition-fast);
+  text-align:center;
+  font-weight:600;
+}
+.option-btn[aria-pressed="true"],
+.option-btn.active{
+  background: linear-gradient(180deg, rgba(255,76,76,0.12), rgba(255,76,76,0.06));
+  box-shadow: 0 8px 26px rgba(255,76,76,0.08);
+  transform: translateY(-3px);
+  border-color: rgba(255,76,76,0.22);
+}
+
+/* Buttons general */
+.controls{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.btn{
+  padding: 12px 18px;
+  border-radius: var(--btn-radius);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.06);
+  cursor:pointer;
+  font-weight:700;
+  min-height:44px;
+  min-width:88px;
+  transition: transform var(--transition-fast) ease, background var(--transition-fast), box-shadow var(--transition-fast);
+  margin: 8px 0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.btn:hover{
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255,76,76,0.06);
+}
+
+/* Next button — prominent */
+.btn-next, .btn-start, .btn-next-question{
+  background: linear-gradient(180deg, var(--accent), #ff2b2b);
+  color: #111;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(255,76,76,0.28);
+  min-width:120px;
+  transition: opacity var(--transition-slow) ease, transform var(--transition-fast) ease;
+  opacity:0;
+  transform: translateY(8px);
+}
+
+/* Visible class to show next with delay (script should add .visible) */
+.btn-next.visible, .btn-start.visible, .btn-next-question.visible{
+  opacity:1;
+  transform:none;
+  transition-delay: 0.8s; /* 0.8s delay before fade-in */
+}
+
+/* Disabled state */
+.btn[aria-disabled="true"], .btn:disabled{
+  opacity:0.45;
+  cursor:not-allowed;
+  transform:none;
+  filter: grayscale(0.1);
+}
+
+/* Skip / small action */
+.btn-skip{
+  background: transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.9);
+  padding:10px 14px;
+}
+
+/* Answers area */
+.question-area{
+  margin-top:18px;
+}
+.question-text{
+  margin:6px 0 12px 0;
+  font-size:17px;
+  color: var(--text);
+}
+
+/* Answer buttons */
+.answers{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+.answer-btn{
+  padding:14px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.12);
+  border:1px solid rgba(255,255,255,0.04);
+  color:var(--text);
+  font-weight:600;
+  text-align:center;
+  min-height:64px;
+  cursor:pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  will-change: transform;
+}
+.answer-btn:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255,76,76,0.06);
+}
+
+/* Correct / Wrong states (script toggles .correct or .wrong) */
+.answer-btn.correct{
+  animation: flashGreen 420ms ease forwards;
+  border-color: rgba(0,255,136,0.55);
+  box-shadow: 0 8px 28px rgba(0,255,136,0.08);
+}
+@keyframes flashGreen{
+  0% { transform: scale(1); background: linear-gradient(180deg, rgba(0,255,136,0.14), rgba(0,255,136,0.06)); }
+  40% { transform: scale(1.06); box-shadow: 0 18px 40px rgba(0,255,136,0.12); }
+  100% { transform: scale(1); background: rgba(0,0,0,0.06); }
+}
+
+/* Wrong/shake */
+.answer-btn.wrong{
+  animation: shakeX 420ms cubic-bezier(.36,.07,.19,.97) both;
+  border-color: rgba(255,68,68,0.7);
+  background: linear-gradient(180deg, rgba(255,68,68,0.06), rgba(255,68,68,0.02));
+  box-shadow: 0 6px 18px rgba(255,68,68,0.06);
+}
+@keyframes shakeX{
+  10%, 90% { transform: translateX(-6px); }
+  20%, 80% { transform: translateX(6px); }
+  30%, 50%, 70% { transform: translateX(-3px); }
+  40%, 60% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+/* Progress bar */
+.progress{
+  margin-top:14px;
+  background: var(--muted);
+  border-radius:6px;
+  height: 12px;
+  position:relative;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg, var(--accent), #ff7b7b);
+  transition: width 0.3s ease;
+  border-radius:6px;
+  box-shadow: inset 0 -6px 18px rgba(0,0,0,0.15);
+}
+.progress-meta{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  font-size:13px;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Timer */
+.timer-wrap{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.timer{
+  background: rgba(255,255,255,0.02);
+  color: var(--accent-weak);
+  font-weight:800;
+  padding:8px 12px;
+  border-radius: 10px;
+  font-size:16px;
+  text-align:center;
+  min-width:86px;
+  box-shadow: 0 6px 18px rgba(255,76,76,0.04);
+  transition: box-shadow 220ms ease, transform 220ms ease;
+}
+
+/* Timer pulse animation (when counting down; script should toggle .counting) */
+.timer.counting{
+  animation: timerPulse 1.4s ease-in-out infinite;
+  box-shadow: 0 8px 30px rgba(255,76,76,0.12);
+}
+@keyframes timerPulse{
+  0% { transform: scale(1); box-shadow: 0 6px 18px rgba(255,76,76,0.06); }
+  50% { transform: scale(1.02); box-shadow: 0 12px 34px rgba(255,76,76,0.14); }
+  100% { transform: scale(1); box-shadow: 0 6px 18px rgba(255,76,76,0.06); }
+}
+
+/* Results */
+.results-card{
+  background: rgba(255,255,255,0.02);
+  padding:18px;
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:flex-start;
+}
+.results-iq{
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  font-size:28px;
+  margin:0;
+  color: var(--text);
+}
+.results-summary{
+  color: rgba(255,255,255,0.9);
+}
+
+/* Footer */
+.app-footer{
+  margin-top:12px;
+  text-align:center;
+  color: rgba(255,255,255,0.6);
+  font-size:13px;
+}
+
+/* Misc */
+.noscript-warning{
+  max-width: var(--max-width);
+  margin: 18px auto;
+  padding: 12px;
+  border-radius:10px;
+  background: rgba(255,76,76,0.06);
+  color: var(--text);
+  border: 1px solid rgba(255,76,76,0.08);
+}
+
+/* Subtle neon glow on focusable elements for INTJ mood */
+:focus{
+  outline: none;
+}
+.btn:focus, .option-btn:focus, .answer-btn:focus, .input:focus{
+  box-shadow: 0 10px 30px rgba(255,76,76,0.12);
+  transform: translateY(-1px);
+}
+
+/* ---------------------------
+   Responsive rules
+   --------------------------- */
+@media (max-width:700px){
+  :root{ --max-width: 100%; }
+  .answers{ grid-template-columns: 1fr; }
+  .option-btn{ flex: 1 1 100%; }
+  .brand{ font-size:18px; }
+  .step{ padding:16px; }
+  .btn-next{ min-width:100%; }
+}
+
+/* ---------------------------
+   Accessibility and reduced motion
+   --------------------------- */
+@media (prefers-reduced-motion: reduce){
+  * { animation-duration: 0ms !important; animation-iteration-count: 1 !important; transition-duration: 0ms !important; }
+}
+
+/* ---------------------------
+   Utility / helper classes (script-friendly)
+   --------------------------- */
+
+/* When script marks a step as active it will add .step--active (handled above) */
+
+/* Progress percent text */
+#progress-percent{ font-weight:700; }
+
+/* A subtle glow for active elements (INTJ) */
+.active-glow{
+  box-shadow: 0 12px 40px rgba(255,76,76,0.12);
+}
+
+/* For endless mode info emphasis */
+.info--endless{
+  background: rgba(255,76,76,0.02);
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(255,76,76,0.04);
+  margin-top:10px;
+  font-size:13px;
+}
+
+/* tiny helper for visually-hidden accessible labels */
+.visually-hidden{
+  position:absolute !important;
+  height:1px; width:1px;
+  overflow:hidden;
+  clip:rect(1px,1px,1px,1px);
+  white-space:nowrap;
+}
+
+/* End of file */
